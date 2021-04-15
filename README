@@ -25,23 +25,25 @@ boto3
 
 ➜  lambda-tensorflow-example> docker build -t  lambda-tensorflow-example .
 
+
+
+# For viczsaurav
+export AWS_ACCOUNT_ID=423894849431
+export REGION=ca-central-1
+
+# Create a ECR repository(One-time)
+aws ecr create-repository --repository-name lambda-tensorflow-example --image-scanning-configuration scanOnPush=true --region ${REGION}(optional if DEFAULT region set)
+
 # Build the docker image
 docker build -t  lambda-tensorflow-example .
 
-# For viczsaurav
-export AWS_ACCOUNT_ID=<AWS_ACCOUNT_ID>
-export REGION=ca-central-1
-
-# Create a ECR repository
-aws ecr create-repository --repository-name lambda-tensorflow-example --image-scanning-configuration scanOnPush=true --region ${REGION}(optional if DEFAULT region set)
-
-# Tag the image to match the repository name
+# Tag the local docker image to match the repository name
 docker tag lambda-tensorflow-example:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/lambda-tensorflow-example:latest
 
-Pushing Docker image config:
+(Help)Pushing Docker image config:
 https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html
 
-# Register docker to ECR (username=AWS for ECR )
+# Register docker to ECR (username=AWS for ECR ) - login
 aws ecr get-login-password --region ${REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com
 
 # Push the image to ECR
