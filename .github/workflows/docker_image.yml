@@ -1,5 +1,5 @@
 name: lambda-build
-  ${{ secrets.DOCKERHUB_PASSWORD }}
+
 on:
   push:
     branches:
