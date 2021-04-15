@@ -51,7 +51,7 @@ jobs:
           # push it to ECR
           echo "::set-output ECR_REGISTRY=$ECR_REGISTRY"
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_DEFAULT_REGION }}.amazonaws.com/$ECR_REPOSITORY:latest
-          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_DEFAULT_REGION }}.amazonaws.com/$ECR_REPOSITORY:latest
-          echo "::set-output ECR_REGISTRY=$ECR_REGISTRY"
-          echo "::set-output name=image::${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_DEFAULT_REGION }}.amazonaws.com/$ECR_REPOSITORY:latest"
+          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          echo "::set-output ECR local IMAGE=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:latest"
